@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { DELETE_USER, SET_SELECTED_USER } from "../../store/types/userType";
 
 class UserManagement extends Component {
   state = {
-    keyword: ""
-  }
+    keyword: "",
+    type: "",
+  };
 
   renderContent = () => {
-    const filteredData = this.props.userList.filter(ele => {
-      return ele.fullName.toLowerCase().indexOf(this.state.keyword.toLowerCase()) !== -1
-    })
+    const filteredData = this.props.userList.filter((ele) => {
+      return (
+        ele.fullName.toLowerCase().indexOf(this.state.keyword.toLowerCase()) !==
+        -1
+      );
+    });
+    this.props.userList.filter((ele) => {
+      return ele.type.indexOf(this.state.type) !== -1;
+    });
 
     // filter type
     // ...
@@ -45,14 +53,14 @@ class UserManagement extends Component {
 
   deleteUser = (user) => {
     this.props.dispatch({
-      type: "DELETE_USER",
+      type: DELETE_USER,
       payload: user,
     });
   };
 
   setSelectedUser = (user) => {
     this.props.dispatch({
-      type: "SET_SELECTED_USER",
+      type: SET_SELECTED_USER,
       payload: user,
     });
   };
@@ -68,16 +76,23 @@ class UserManagement extends Component {
                 type="text"
                 placeholder="Search by full name..."
                 className="form-control"
-                onChange={(event) => this.setState({keyword: event.target.value})}
+                onChange={(event) =>
+                  this.setState({ keyword: event.target.value })
+                }
               />
             </div>
           </div>
           <div className="col-3 ml-auto">
             <div className="form-group mb-0">
-              <select className="form-control">
-                <option>All</option>
-                <option>Client</option>
-                <option>Admin</option>
+              <select
+                className="form-control"
+                onChange={(event) =>
+                  this.setState({ type: event.target.value })
+                }
+              >
+                <option value={""}>All</option>
+                <option value={"Client"}>Client</option>
+                <option value={"Admin"}>Admin</option>
               </select>
             </div>
           </div>

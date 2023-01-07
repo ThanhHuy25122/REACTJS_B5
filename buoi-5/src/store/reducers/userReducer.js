@@ -1,3 +1,11 @@
+import {
+  ADD_USER,
+  DELETE_USER,
+  SEARCH_USER,
+  SET_SELECTED_USER,
+  UPDATE_USER,
+} from "../types/userType";
+
 const DEFAULT_STATE = {
   userList: [
     {
@@ -26,7 +34,7 @@ export const userReducer = (state = DEFAULT_STATE, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case "ADD_USER": {
+    case ADD_USER: {
       const data = [...state.userList];
 
       data.push({
@@ -39,13 +47,13 @@ export const userReducer = (state = DEFAULT_STATE, action) => {
       break;
     }
 
-    case "SET_SELECTED_USER": {
+    case SET_SELECTED_USER: {
       state.selectedUser = payload;
 
       break;
     }
 
-    case "UPDATE_USER": {
+    case UPDATE_USER: {
       state.userList = state.userList.map((element) =>
         element.id === payload.id ? payload : element
       );
@@ -54,7 +62,7 @@ export const userReducer = (state = DEFAULT_STATE, action) => {
       break;
     }
 
-    case "DELETE_USER": {
+    case DELETE_USER: {
       state.userList = state.userList.filter((element) =>
         element.id === payload.id ? false : true
       );

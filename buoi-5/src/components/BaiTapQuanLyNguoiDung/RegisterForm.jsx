@@ -28,30 +28,7 @@ class RegisterForm extends Component {
   };
 
   handleChange = (event) => {
-    // console.log(event.target.name);
-    // console.log(event.target.value);
-
-    // if (event.target.name === "username") {
-    //   this.setState({
-    //     username: event.target.value,
-    //   });
-    // }
-
-    // if (event.target.name === "fullName") {
-    //   this.setState({
-    //     fullName: event.target.value,
-    //   });
-    // }
-
     const { name, value } = event.target;
-
-    // object literals
-
-    // giữ lại giá trị state cũ ở cấp ngoài cùng
-    // đối với cấp state thứ 2 trở lên cần phải sử dụng spread operator
-    // this.setState({
-    //   [name]: value,
-    // });
 
     this.setState({
       values: {
@@ -91,9 +68,6 @@ class RegisterForm extends Component {
       event.target;
     const { valueMissing, tooShort, tooLong, patternMismatch } = validity;
 
-    // console.log(event);
-    // console.log(validationMessage);
-
     console.log(patternMismatch);
 
     if (valueMissing) {
@@ -117,13 +91,6 @@ class RegisterForm extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, currentState) {
-    // console.log(nextProps, "nextProps");
-    // console.log(currentState);
-    console.log({
-      nextProps: JSON.parse(JSON.stringify(nextProps)),
-      currentState: JSON.parse(JSON.stringify(currentState)),
-    });
-
     if (
       nextProps.selectedUser &&
       currentState.values.id !== nextProps.selectedUser.id
@@ -138,11 +105,11 @@ class RegisterForm extends Component {
   render() {
     const {
       username = "",
-      email = "",
-      phoneNumber = "",
-      password = "",
-      type = "",
       fullName = "",
+      password = "",
+      phoneNumber = "",
+      email = "",
+      type = "",
     } = this.state.values || {};
 
     return (
@@ -151,22 +118,18 @@ class RegisterForm extends Component {
           REGISTER FORM
         </div>
         <div className="card-body">
-          {/* onSubmit chạy khi trong form có button có type là submit */}
           <form ref={this.formRef} noValidate onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col-6">
                 <div className="form-group">
                   <label>Username</label>
                   <input
-                    // ? ý nghĩa là nếu selectedUser có thì mới chấm tiếp đến username còn ko có thì ngừng
-                    // value={this.props.selectedUser?.username}
                     value={username}
                     title="Username"
                     required
                     name="username"
                     type="text"
                     className="form-control"
-                    // onChange={(event) => this.handleChange(event)}
                     onChange={this.handleChange}
                     onBlur={this.handleBlur}
                   />
@@ -226,7 +189,6 @@ class RegisterForm extends Component {
                     onChange={this.handleChange}
                     onBlur={this.handleBlur}
                   />
-                  {/* onBlur chạy khi thoát ra khỏi ô input ( click, tab...) */}
                   <span className="text-danger">
                     {this.state.errors.phoneNumber}
                   </span>
@@ -235,17 +197,12 @@ class RegisterForm extends Component {
               <div className="col-6">
                 <div className="form-group">
                   <label>Email</label>
-                  {/* 
-                    pattern của input cần phải sử dụng regex string
-                    cách chuyển từ regex object -> regex string 
-                    => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.source
-                  */}
+
                   <input
                     value={email}
                     title="Email"
                     required
                     type="text"
-                    // pattern="^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     className="form-control"
                     name="email"
@@ -276,7 +233,6 @@ class RegisterForm extends Component {
             </div>
 
             <div className="card-footer text-muted">
-              {/* button không định nghĩa type , mặc định sẽ có type là submit */}
               <button
                 disabled={!this.formRef.current?.checkValidity()}
                 className="btn btn-warning mr-2"
