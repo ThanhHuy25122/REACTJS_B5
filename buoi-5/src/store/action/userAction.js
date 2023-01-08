@@ -3,7 +3,6 @@ import {
   SET_SELECTED_USER,
   UPDATE_USER,
   DELETE_USER,
-  SEARCH_USER,
 } from "../types/userType";
 
 export const addUserAction = (payload) => {
@@ -29,13 +28,6 @@ export const updateUserAction = (payload) => {
 export const deleteUserAciton = (payload) => {
   return {
     type: DELETE_USER,
-    payload,
-  };
-};
-
-export const searchUserAction = (payload) => {
-  return {
-    type: SEARCH_USER,
     payload,
   };
 };

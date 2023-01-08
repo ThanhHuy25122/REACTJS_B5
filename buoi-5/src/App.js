@@ -1,5 +1,5 @@
 // import logo from "./logo.svg";
-// import "./App.css";
+import "./App.css";
 import BaiTapQuanLyNguoidung from "./components/BaiTapQuanLyNguoiDung/BaiTapQuanLyNguoiDung";
 
 import "bootstrap/dist/css/bootstrap.min.css";

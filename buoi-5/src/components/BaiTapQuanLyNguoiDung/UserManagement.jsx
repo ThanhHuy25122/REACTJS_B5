@@ -12,11 +12,8 @@ class UserManagement extends Component {
     const filteredData = this.props.userList.filter((ele) => {
       return (
         ele.fullName.toLowerCase().indexOf(this.state.keyword.toLowerCase()) !==
-        -1
+          -1 && ele.type.indexOf(this.state.type) !== -1
       );
-    });
-    this.props.userList.filter((ele) => {
-      return ele.type.indexOf(this.state.type) !== -1;
     });
 
     // filter type

@@ -1,7 +1,6 @@
 import {
   ADD_USER,
   DELETE_USER,
-  SEARCH_USER,
   SET_SELECTED_USER,
   UPDATE_USER,
 } from "../types/userType";

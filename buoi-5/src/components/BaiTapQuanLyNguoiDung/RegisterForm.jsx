@@ -64,8 +64,7 @@ class RegisterForm extends Component {
 
   handleBlur = (event) => {
     let message = "";
-    const { validationMessage, name, validity, title, minLength, maxLength } =
-      event.target;
+    const { name, validity, title, minLength, maxLength } = event.target;
     const { valueMissing, tooShort, tooLong, patternMismatch } = validity;
 
     console.log(patternMismatch);
